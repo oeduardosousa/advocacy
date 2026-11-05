@@ -41,6 +41,8 @@ export function HomeMotion() {
         const step = Math.min(stagger.lines * k, stagger.max / Math.max(split.lines.length, 1));
         gsap.from(split.lines, {
           yPercent: shift.text,
+          rotation: lite ? 0 : 4,
+          transformOrigin: "0% 100%",
           duration: lite ? 0.6 : dur.reveal,
           stagger: step,
           ease: ease.out,

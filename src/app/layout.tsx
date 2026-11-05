@@ -5,6 +5,7 @@ import { Veil } from "@/components/layout/Veil";
 import { Footer } from "@/components/layout/Footer";
 import { SiteNav } from "@/components/layout/SiteNav";
 import { WhatsAppBar } from "@/components/layout/WhatsAppBar";
+import { Ambient } from "@/components/providers/Ambient";
 import { MotionProvider } from "@/components/providers/MotionProvider";
 import { PageTransitionShell } from "@/components/providers/PageTransition";
 import { instrumentSans, newsreader } from "@/lib/fonts";
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           Ir para o conteúdo
         </a>
         <MotionProvider>
+          <Ambient />
           <PageTransitionShell>
             <SiteNav />
             <WhatsAppBar />
