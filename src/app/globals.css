@@ -1,0 +1,267 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+/*
+ * Tinta e Papel — tokens mirrored one-to-one from DESIGN.md.
+ * Tailwind default palette, radii, shadows and breakpoints are reset so only
+ * design-system values can be used (The No-Pure Rule: no #fff, no #000).
+ */
+
+@theme {
+  /* ---- Colors ---- */
+  --color-*: initial;
+  --color-paper: #f4efe6;
+  --color-paper-light: #fbf8f2;
+  --color-paper-deep: #eae3d6;
+  --color-ink: #14110f;
+  --color-ink-soft: #3a342d;
+  --color-ink-mute: #6b6155;
+  --color-ink-dim: #b8afa1;
+  --color-oxblood: #7a1f2b;
+  --color-oxblood-on-ink: #d9929b;
+  --color-rule: #d6cdbd;
+  --color-success: #2f5d3a;
+  --color-warning: #7a4e00;
+  --color-error: #b3261e;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  /* ---- Font families (next/font injects --font-newsreader / --font-instrument) ---- */
+  --font-serif: var(--font-newsreader), Georgia, serif;
+  --font-sans: var(--font-instrument), system-ui, sans-serif;
+
+  /* ---- Type scale (size / line-height / tracking) ---- */
+  --text-display: clamp(3.25rem, 1.5rem + 7vw, 8rem);
+  --text-display--line-height: 0.96;
+  --text-display--letter-spacing: -0.02em;
+  --text-headline: clamp(2.25rem, 1.4rem + 3.4vw, 4.5rem);
+  --text-headline--line-height: 1.04;
+  --text-headline--letter-spacing: -0.015em;
+  --text-title: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
+  --text-title--line-height: 1.15;
+  --text-title--letter-spacing: -0.01em;
+  --text-lead: 1.375rem;
+  --text-lead--line-height: 1.45;
+  --text-article: 1.25rem;
+  --text-article--line-height: 1.65;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.6;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.5;
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.2;
+  --text-label--letter-spacing: 0.14em;
+
+  /* ---- Spacing: Tailwind's 4px base already equals the DESIGN.md scale
+         (1=4, 2=8, 3=12, 4=16, 6=24, 8=32, 12=48, 16=64, 24=96, 32=128, 48=192) ---- */
+  --spacing: 0.25rem;
+
+  /* ---- Radius: square like paper; 2px for form fields; circles only for seal/cursor ---- */
+  --radius-*: initial;
+  --radius-none: 0px;
+  --radius-sm: 2px;
+  --radius-full: 9999px;
+
+  /* ---- Shadows: the only one belongs to a sheet in motion ---- */
+  --shadow-*: initial;
+  --shadow-sheet:
+    0 1px 0 rgb(20 17 15 / 0.06), 0 24px 48px -24px rgb(20 17 15 / 0.28);
+  --shadow-none: 0 0 #0000;
+
+  /* ---- Breakpoints: 360 floor, 640, 1024, 1440, 1920 ---- */
+  --breakpoint-*: initial;
+  --breakpoint-sm: 40rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 90rem;
+  --breakpoint-2xl: 120rem;
+
+  /* ---- Easings (custom; never the built-in keywords) ---- */
+  --ease-*: initial;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-inout: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* Motion + layout tokens that are not Tailwind namespaces; always emitted. */
+@theme static {
+  /* Durations */
+  --dur-instant: 100ms;
+  --dur-fast: 160ms;
+  --dur-base: 240ms;
+  --dur-slow: 480ms;
+  --dur-reveal: 900ms;
+  --dur-scene: 1200ms;
+
+  /* Stagger */
+  --stagger-lines: 90ms;
+  --stagger-words: 30ms;
+  --stagger-items: 70ms;
+  --stagger-max: 600ms;
+
+  /* Distances and scale */
+  --shift-text: 105%;
+  --shift-fade: 16px;
+  --press-scale: 0.97;
+  --parallax-max: 8%;
+
+  /* Layout */
+  --container-max: 1280px;
+  --gutter: clamp(20px, 5vw, 72px);
+  --section-major: clamp(96px, 14vw, 192px);
+  --section-minor: clamp(64px, 8vw, 128px);
+}
+
+/* ---- Semantic type utilities (family + weight + size bundle) ---- */
+@utility type-display {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: var(--text-display);
+  line-height: var(--text-display--line-height);
+  letter-spacing: var(--text-display--letter-spacing);
+}
+@utility type-headline {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: var(--text-headline);
+  line-height: var(--text-headline--line-height);
+  letter-spacing: var(--text-headline--letter-spacing);
+}
+@utility type-title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: var(--text-title);
+  line-height: var(--text-title--line-height);
+  letter-spacing: var(--text-title--letter-spacing);
+}
+@utility type-lead {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: var(--text-lead);
+  line-height: var(--text-lead--line-height);
+  max-width: 55ch;
+}
+@utility type-article {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: var(--text-article);
+  line-height: var(--text-article--line-height);
+  max-width: 65ch;
+}
+@utility type-body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
+}
+@utility type-small {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--text-small);
+  line-height: var(--text-small--line-height);
+}
+@utility type-label {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: var(--text-label);
+  line-height: var(--text-label--line-height);
+  letter-spacing: var(--text-label--letter-spacing);
+  text-transform: uppercase;
+}
+
+/* ---- Layout helpers ---- */
+@utility container-page {
+  width: 100%;
+  max-width: calc(var(--container-max) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+@utility section-major {
+  padding-block: var(--section-major);
+}
+@utility section-minor {
+  padding-block: var(--section-minor);
+}
+
+/* ---- Base ---- */
+@layer base {
+  html {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    min-height: 100vh;
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    background: var(--color-paper);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-oxblood);
+    color: var(--color-paper);
+  }
+
+  /* Visible focus everywhere: 2px Oxblood ring, 3px Paper offset, never removed. */
+  :focus-visible {
+    outline: 2px solid var(--color-oxblood);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 3px var(--color-paper);
+  }
+
+  /* Skip link: first in tab order, visible on focus. */
+  .skip-link {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 100;
+    padding: 12px 20px;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-family: var(--font-sans);
+    font-size: var(--text-label);
+    font-weight: 500;
+    letter-spacing: var(--text-label--letter-spacing);
+    text-transform: uppercase;
+    transform: translateY(-200%);
+  }
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+}
+
+/* ---- Page transition sheet (single fixed element, transforms only) ---- */
+.page-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: var(--color-paper-deep);
+  pointer-events: none;
+  /* No CSS transform here: GSAP owns it (yPercent), parked at 100% once loaded.
+     Until then the sheet is simply not rendered. */
+  visibility: hidden;
+}
+.page-sheet[data-moving="true"] {
+  visibility: visible;
+  box-shadow: var(--shadow-sheet);
+  will-change: transform;
+}
+
+/* ---- Reduced motion: no animation or smooth scroll by default.
+        Opacity fades (<= 200ms) are re-enabled explicitly where specified. ---- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}
