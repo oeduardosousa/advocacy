@@ -13,12 +13,29 @@ import { SITE } from "@/lib/site";
 
 import "./globals.css";
 
+// No domain yet (BRIEF.md): absolute URLs (canonical, og:image) switch on when
+// NEXT_PUBLIC_SITE_URL is set at build time, e.g. https://example.com
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+
 export const metadata: Metadata = {
+  ...(siteUrl ? { metadataBase: new URL(siteUrl), alternates: { canonical: "./" } } : {}),
   title: {
     default: `${SITE.name} — projeto conceito`,
     template: `%s — ${SITE.name}`,
   },
-  description: SITE.notice,
+  description: SITE.description,
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    siteName: SITE.name,
+    title: `${SITE.name} — projeto conceito`,
+    description: SITE.description,
+    // Absolute image URL needs a domain: without one, Next would emit a localhost URL.
+    ...(siteUrl
+      ? { images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Ilustração de demonstração: luz de janela sobre uma mesa, com papéis e uma caneta-tinteiro." }] }
+      : {}),
+  },
+  twitter: { card: siteUrl ? "summary_large_image" : "summary" },
 };
 
 export const viewport: Viewport = {

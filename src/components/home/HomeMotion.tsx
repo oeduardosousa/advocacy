@@ -45,12 +45,26 @@ export function HomeMotion() {
           start: "top 85%",
           once: true,
           onEnter: () => {
+            gsap.set(el, { opacity: 1 });
+            if (lite) {
+              // Phones and tablets: lines rise and fade in (~0.5s) instead of letter-by-letter,
+              // so a headline is never half-written while the text below is already readable.
+              const split = SplitText.create(el, { type: "lines", linesClass: "rv-line" });
+              gsap.from(split.lines, {
+                opacity: 0,
+                y: shift.fade,
+                duration: 0.45,
+                stagger: 0.08,
+                ease: ease.out,
+                onComplete: () => split.revert(),
+              });
+              return;
+            }
             const split = SplitText.create(el, {
               type: splitType(),
               linesClass: "rv-line",
             });
             const { targets, vars } = titleTween(variant, split, k);
-            gsap.set(el, { opacity: 1 });
             gsap.from(targets, {
               ...vars,
               ease: ease.out,

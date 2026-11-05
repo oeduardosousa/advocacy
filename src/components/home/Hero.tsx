@@ -64,7 +64,7 @@ export function Hero() {
 
       // Lead, actions
       if (blocks.length) {
-        tl.from(blocks, { opacity: 0, y: shift.fade, duration: 0.6, stagger: stagger.items * k }, lite ? 0.5 : 0.9);
+        tl.from(blocks, { opacity: 0, y: shift.fade, duration: 0.6, stagger: stagger.items * k }, lite ? 0.4 : 0.6);
       }
 
       // 3. Develop
@@ -213,7 +213,7 @@ export function Hero() {
               com cuidado e explicamos cada etapa.
             </p>
             <div data-hero-block className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-2">
-              <TransitionLink href={ROUTES.message} className="btn btn-whatsapp settle hidden lg:inline-flex">
+              <TransitionLink href={ROUTES.message} className="btn btn-whatsapp settle max-lg:hidden!">
                 <WhatsAppGlyph />
                 Fale Conosco
               </TransitionLink>

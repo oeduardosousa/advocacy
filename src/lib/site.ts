@@ -4,6 +4,9 @@ export const SITE = {
   /** Placeholder wordmark, final fictional name still open (BRIEF.md). */
   name: "Escritório Demo",
   notice: "Projeto conceito: escritório e conteúdo fictícios.",
+  /** Meta description for the home page and social previews. */
+  description:
+    "Direito explicado com clareza, conduzido com método. Seis áreas de atuação, atendimento próximo e linguagem simples. Projeto conceito: escritório fictício.",
   disclaimer:
     "Conteúdo meramente informativo, sem caráter de aconselhamento jurídico.",
 } as const;

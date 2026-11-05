@@ -53,16 +53,25 @@ export function Footer() {
                   Fale Conosco
                 </TransitionLink>
               </li>
-              <li>
-                <a href={CONTACT.instagram} className={linkClass}>
-                  Instagram
-                </a>
-              </li>
-              <li>
-                <a href={CONTACT.linkedin} className={linkClass}>
-                  LinkedIn
-                </a>
-              </li>
+              {(
+                [
+                  ["Instagram", CONTACT.instagram],
+                  ["LinkedIn", CONTACT.linkedin],
+                ] as const
+              ).map(([label, href]) => (
+                <li key={label}>
+                  {href === "#" ? (
+                    // Demo profile: no real account exists, so it is text, not a dead link.
+                    <span className="inline-flex min-h-11 items-center text-ink-dim">
+                      {label} <span className="ml-2 opacity-80">(demonstração)</span>
+                    </span>
+                  ) : (
+                    <a href={href} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                      {label}
+                    </a>
+                  )}
+                </li>
+              ))}
             </ul>
             <p className="type-small mt-3">Endereço e telefone de demonstração.</p>
           </div>

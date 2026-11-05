@@ -527,7 +527,7 @@
 .hero-cover,
 .img-cover {
   transform-origin: top;
-  animation: cover-failsafe 0s linear 4s forwards;
+  animation: cover-failsafe 0s linear 2s forwards;
 }
 @keyframes cover-failsafe {
   to {

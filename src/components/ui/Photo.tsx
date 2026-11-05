@@ -44,7 +44,10 @@ export function Photo({
           />
         </div>
       </div>
-      <div data-image-cover aria-hidden="true" className="img-cover absolute inset-0 bg-paper-deep" />
+      {/* The LCP image is never covered: the paper reveal would leave a blank box on arrival. */}
+      {priority ? null : (
+        <div data-image-cover aria-hidden="true" className="img-cover absolute inset-0 bg-paper-deep" />
+      )}
     </div>
   );
 }
