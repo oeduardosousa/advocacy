@@ -57,7 +57,7 @@ export function PostIndex({ posts, tags }: { posts: PostSummary[]; tags: string[
             className="post-row border-t border-rule last:border-b"
             style={{ ["--i" as string]: i }}
           >
-            <article data-cursor="Ler" className="group grid grid-cols-4 gap-x-4 gap-y-5 py-8 sm:grid-cols-8 sm:gap-x-5 lg:grid-cols-10 lg:gap-x-6 lg:py-10">
+            <article className="group grid grid-cols-4 gap-x-4 gap-y-5 py-8 sm:grid-cols-8 sm:gap-x-5 lg:grid-cols-10 lg:gap-x-6 lg:py-10">
               <div className="col-span-4 sm:col-span-3 lg:col-span-3">
                 <div className="relative aspect-[3/2] overflow-hidden bg-paper-deep">
                   <Img

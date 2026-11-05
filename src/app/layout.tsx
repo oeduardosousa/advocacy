@@ -6,7 +6,6 @@ import { Footer } from "@/components/layout/Footer";
 import { SiteNav } from "@/components/layout/SiteNav";
 import { WhatsAppBar } from "@/components/layout/WhatsAppBar";
 import { Ambient } from "@/components/providers/Ambient";
-import { Cursor } from "@/components/providers/Cursor";
 import { MotionProvider } from "@/components/providers/MotionProvider";
 import { PageTransitionShell } from "@/components/providers/PageTransition";
 import { instrumentSans, newsreader } from "@/lib/fonts";
@@ -40,7 +39,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </a>
         <MotionProvider>
           <Ambient />
-          <Cursor />
           <PageTransitionShell>
             <SiteNav />
             <WhatsAppBar />
