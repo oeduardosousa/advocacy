@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 
+import { Veil } from "@/components/layout/Veil";
 import { SiteNav } from "@/components/layout/SiteNav";
 import { WhatsAppBar } from "@/components/layout/WhatsAppBar";
 import { MotionProvider } from "@/components/providers/MotionProvider";
@@ -24,8 +25,13 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${newsreader.variable} ${instrumentSans.variable}`}>
+    <html
+      lang="pt-BR"
+      className={`${newsreader.variable} ${instrumentSans.variable}`}
+      suppressHydrationWarning
+    >
       <body>
+        <Veil />
         <a href="#conteudo" className="skip-link">
           Ir para o conteúdo
         </a>
