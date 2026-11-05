@@ -36,7 +36,7 @@ export default function AreasPage() {
           className="col-span-4 sm:col-span-8 lg:col-span-10 lg:col-start-3"
         >
           {areas.map((area, i) => (
-            <li key={area.slug} className="border-t border-rule last:border-b">
+            <li key={area.slug} data-cursor="Ver" className="border-t border-rule last:border-b">
               <TransitionLink
                 href={ROUTES.area(area.slug)}
                 className="row-link group grid grid-cols-[2.5rem_1fr_auto] items-start gap-x-4 py-7 sm:grid-cols-[3.5rem_1fr_auto] lg:grid-cols-[3.5rem_minmax(0,1fr)_minmax(0,1.1fr)_auto] lg:gap-x-8 lg:py-9"

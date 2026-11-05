@@ -112,6 +112,7 @@ export function Areas({ areas }: { areas: Area[] }) {
               return (
                 <li
                   key={area.slug}
+                  data-cursor="Ver"
                   className="relative border-t border-rule last:border-b"
                   onMouseEnter={pinned ? () => setActive(i) : undefined}
                 >

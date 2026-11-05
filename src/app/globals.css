@@ -910,3 +910,63 @@ html[data-veil-go] .veil {
     font-size: 1.125rem;
   }
 }
+
+/* ---- Custom cursor (fine pointer, Full tier only; native cursor stays) ---- */
+.cursor-ring,
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 160ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1));
+}
+.cursor-ring {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+}
+.cursor-ring-shape {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--color-ink);
+  border-radius: 9999px;
+  transition:
+    transform 200ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)),
+    background-color 200ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1));
+}
+.cursor-ring[data-hint="true"] .cursor-ring-shape {
+  transform: scale(1.4); /* 40px -> 56px, transform only */
+  background-color: var(--color-paper-light);
+}
+.cursor-label {
+  position: relative;
+  color: var(--color-ink);
+  opacity: 0;
+  transition: opacity 200ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1));
+}
+.cursor-ring[data-hint="true"] .cursor-label {
+  opacity: 1;
+}
+.cursor-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: var(--color-ink);
+}
+.cursor-ring[data-visible="true"]:not([data-hidden="true"]),
+.cursor-dot[data-visible="true"]:not([data-hidden="true"]) {
+  opacity: 1;
+}
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .cursor-ring,
+  .cursor-dot {
+    display: none;
+  }
+}
+/* The dot steps aside while the ring carries a label, so the label stays legible. */
+.cursor-dot[data-hint="true"] {
+  opacity: 0 !important;
+}

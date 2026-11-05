@@ -6,7 +6,7 @@ import { ROUTES } from "@/lib/site";
 
 function PostCard({ post, large }: { post: Post; large?: boolean }) {
   return (
-    <article className="group">
+    <article className="group" data-cursor="Ler">
       <Photo
         src={post.cover}
         alt={post.coverAlt}
