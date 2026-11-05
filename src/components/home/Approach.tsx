@@ -31,7 +31,7 @@ export function Approach() {
       <div className="container-page section-major">
         <div className="grid grid-cols-4 gap-x-4 gap-y-12 sm:grid-cols-8 sm:gap-x-5 lg:grid-cols-12 lg:gap-x-6">
           <div className="relative col-span-4 sm:col-span-8 lg:col-span-2 lg:row-span-2">
-            <p className="type-label text-ink-mute lg:text-right lg:pr-6">Abordagem</p>
+            <p className="type-label margin-label text-ink-mute lg:text-right lg:pr-6">Abordagem</p>
             <div
               aria-hidden="true"
               data-margin-rule

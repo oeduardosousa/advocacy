@@ -18,7 +18,7 @@ export function Team({ members }: { members: TeamMember[] }) {
     <section id="equipe" aria-labelledby="team-title" className="relative z-20 bg-paper">
       <div className="container-page section-major">
         <div className="grid grid-cols-4 gap-x-4 gap-y-12 sm:grid-cols-8 sm:gap-x-5 lg:grid-cols-12 lg:gap-x-6">
-          <p className="type-label col-span-4 text-ink-mute sm:col-span-8 lg:col-span-2 lg:text-right">
+          <p className="type-label margin-label col-span-4 text-ink-mute sm:col-span-8 lg:col-span-2 lg:text-right">
             Equipe
           </p>
           <div className="col-span-4 sm:col-span-8 lg:col-span-9">

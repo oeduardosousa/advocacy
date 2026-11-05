@@ -70,7 +70,7 @@ export function Areas({ areas }: { areas: Area[] }) {
       >
         <div className="grid grid-cols-4 gap-x-4 sm:grid-cols-8 sm:gap-x-5 lg:grid-cols-12 lg:gap-x-6">
           {/* Margin: inline numeral on small screens, advancing numeral when pinned */}
-          <p className="type-label col-span-4 mb-6 text-ink-mute sm:col-span-8 lg:col-span-2 lg:mb-0 lg:text-right">
+          <p className="type-label margin-label col-span-4 mb-6 text-ink-mute sm:col-span-8 lg:col-span-2 lg:mb-0 lg:text-right">
             Áreas de atuação
           </p>
           <div className="col-span-4 sm:col-span-8 lg:col-span-10">

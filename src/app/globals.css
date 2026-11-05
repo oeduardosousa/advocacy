@@ -112,7 +112,10 @@
 }
 
 /* ---- Semantic type utilities (family + weight + size bundle) ---- */
+/* Optical left edge: large serif capitals carry side-bearing (0.03-0.04em), so pull the
+   block left until the stems line up with the small text below. */
 @utility type-display {
+  margin-inline-start: -0.025em;
   font-family: var(--font-serif);
   font-weight: 400;
   font-size: var(--text-display);
@@ -120,6 +123,7 @@
   letter-spacing: var(--text-display--letter-spacing);
 }
 @utility type-headline {
+  margin-inline-start: -0.02em;
   font-family: var(--font-serif);
   font-weight: 400;
   font-size: var(--text-headline);
@@ -168,6 +172,14 @@
   text-transform: uppercase;
 }
 
+/* Margin label: on desktop its baseline sits on the first baseline of the section headline
+   (headline baseline is 0.743em from its box top, label baseline 0.917em of its own size). */
+@utility margin-label {
+  @media (min-width: 1024px) {
+    padding-top: calc(var(--text-headline) * 0.743 - 0.917em);
+  }
+}
+
 /* ---- Layout helpers ---- */
 @utility container-page {
   width: 100%;
@@ -189,6 +201,18 @@
     color: var(--color-ink);
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
+    /* Browser surfaces take the palette: scrollbar, form accents, caret, tap flash. */
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-ink-dim) var(--color-paper);
+    accent-color: var(--color-oxblood);
+    caret-color: var(--color-oxblood);
+    -webkit-tap-highlight-color: rgb(122 31 43 / 0.12);
+  }
+
+  /* Tailwind v4 resets buttons to the default arrow; pressable things get the hand. */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
   }
 
   body {
@@ -213,6 +237,29 @@
     outline: 2px solid var(--color-oxblood);
     outline-offset: 3px;
     box-shadow: 0 0 0 3px var(--color-paper);
+  }
+
+  /* Ink surfaces: the base Oxblood ring would be 1.8:1 there, so use the on-ink tone
+     and an Ink offset halo. */
+  .bg-ink ::selection,
+  .bg-ink::selection {
+    background: var(--color-oxblood-on-ink);
+    color: var(--color-ink);
+  }
+  .bg-ink :focus-visible {
+    outline-color: var(--color-oxblood-on-ink);
+    box-shadow: 0 0 0 3px var(--color-ink);
+  }
+  /* The mobile bar is Oxblood itself: ring inside it, in Paper. */
+  .wa-bar :focus-visible {
+    outline-color: var(--color-paper);
+    outline-offset: -6px;
+    box-shadow: none;
+  }
+  /* <main> is focused programmatically by the skip link; it is not a control. */
+  #conteudo:focus {
+    outline: none;
+    box-shadow: none;
   }
 
   /* Skip link: first in tab order, visible on focus. */

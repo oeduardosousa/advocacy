@@ -11,6 +11,10 @@ export default function BlogPage() {
   const posts = getPosts();
   return (
     <PagePlaceholder title="Blog" description="Artigos informativos de demonstração.">
+      {posts.length === 0 ? (
+        <p className="type-body text-ink-soft">Ainda não há artigos publicados. Volte em breve.</p>
+      ) : null}
+      {posts.length > 0 ? (
       <ul className="border-t border-rule">
         {posts.map((post) => (
           <li key={post.slug} className="border-b border-rule py-4">
@@ -21,6 +25,7 @@ export default function BlogPage() {
           </li>
         ))}
       </ul>
+      ) : null}
     </PagePlaceholder>
   );
 }
