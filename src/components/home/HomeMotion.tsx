@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 
 import { useMotion } from "@/components/providers/MotionProvider";
+import { splitType, titleTween, TITLE_VARIANTS, type TitleVariant } from "@/lib/motion/variants";
 import { dur, ease, LITE_STAGGER_FACTOR, scale, shift, stagger } from "@/lib/motion/tokens";
 
 /**
@@ -31,23 +32,31 @@ export function HomeMotion() {
     const reveals = (lite: boolean) => {
       const k = lite ? LITE_STAGGER_FACTOR : 1;
 
-      all<HTMLElement>('[data-reveal="lines"]').forEach((el) => {
-        const split = SplitText.create(el, {
-          type: "lines",
-          mask: "lines",
-          maskClass: "line-mask",
-          linesClass: "rv-line",
-        });
-        const step = Math.min(stagger.lines * k, stagger.max / Math.max(split.lines.length, 1));
-        gsap.from(split.lines, {
-          yPercent: shift.text,
-          rotation: lite ? 0 : 4,
-          transformOrigin: "0% 100%",
-          duration: lite ? 0.6 : dur.reveal,
-          stagger: step,
-          ease: ease.out,
-          scrollTrigger: { trigger: el, start: "top 85%", once: true },
-          onComplete: () => split.revert(),
+      // Each headline gets a different entrance; the walk starts at a random point per visit.
+      const startAt = Math.floor(Math.random() * TITLE_VARIANTS.length);
+      // SplitText (lines + chars) forces layout and creates hundreds of spans, so it runs
+      // lazily when each headline is about to enter, never for all of them at startup.
+      // Until then the headline is hidden with a cheap opacity set (no layout read).
+      all<HTMLElement>('[data-reveal="lines"]').forEach((el, index) => {
+        const variant: TitleVariant = lite ? "cascade" : TITLE_VARIANTS[(startAt + index) % TITLE_VARIANTS.length];
+        gsap.set(el, { autoAlpha: 0 });
+        ScrollTrigger.create({
+          trigger: el,
+          start: "top 85%",
+          once: true,
+          onEnter: () => {
+            const split = SplitText.create(el, {
+              type: splitType(),
+              linesClass: "rv-line",
+            });
+            const { targets, vars } = titleTween(variant, split, k);
+            gsap.set(el, { autoAlpha: 1 });
+            gsap.from(targets, {
+              ...vars,
+              ease: ease.out,
+              onComplete: () => split.revert(),
+            });
+          },
         });
       });
 

@@ -184,7 +184,6 @@ export function Areas({ areas }: { areas: Area[] }) {
                             name={areaImage(area.slug)}
                             alt={`Ilustração de demonstração para ${area.name}`}
                             sizes="(min-width: 640px) 80vw, 100vw"
-                            loading="eager"
                             className="object-cover"
                           />
                         </div>

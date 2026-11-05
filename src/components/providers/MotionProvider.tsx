@@ -90,14 +90,22 @@ export function MotionProvider({ children }: { children: ReactNode }) {
 
         mm = runtime.createMotionMatcher({
           full: () => {
-            const handle = runtime.startLenis();
-            setState({
-              ready: true,
-              tier: "full",
-              motion: runtime,
-              lenis: handle.lenis,
+            // Ready right away; smooth scroll joins when its chunk arrives (consumers accept null).
+            setState({ ready: true, tier: "full", motion: runtime, lenis: null });
+            let cancelled = false;
+            let destroy: (() => void) | undefined;
+            runtime.startLenis().then((handle) => {
+              if (cancelled) {
+                handle.destroy();
+                return;
+              }
+              destroy = handle.destroy;
+              setState((prev) => ({ ...prev, lenis: handle.lenis }));
             });
-            return handle.destroy;
+            return () => {
+              cancelled = true;
+              destroy?.();
+            };
           },
           lite: () => {
             setState({ ready: true, tier: "lite", motion: runtime, lenis: null });

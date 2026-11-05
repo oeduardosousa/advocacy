@@ -10,7 +10,7 @@ import gsap from "gsap";
 import { CustomEase } from "gsap/CustomEase";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
-import Lenis from "lenis";
+import type Lenis from "lenis";
 
 import { easeCurves } from "./tokens";
 import { isLowEndDevice, MEDIA, type MotionTier } from "./tier";
@@ -84,10 +84,12 @@ export interface LenisHandle {
  * One Lenis instance, driven by the GSAP ticker and synced with ScrollTrigger
  * (DESIGN.md "Libraries and ownership"). Only call from the Full tier.
  */
-export function startLenis(): LenisHandle {
+export async function startLenis(): Promise<LenisHandle> {
   initMotion();
 
-  const lenis = new Lenis({
+  // Own chunk: Lenis is only needed on the Full tier, so mobile never downloads or parses it.
+  const { default: LenisCtor } = await import("lenis");
+  const lenis = new LenisCtor({
     autoRaf: false,
     smoothWheel: true,
     duration: 1.15,
@@ -109,5 +111,5 @@ export function startLenis(): LenisHandle {
   };
 }
 
-export { CustomEase, gsap, Lenis, ScrollTrigger, SplitText, useGSAP };
+export { CustomEase, gsap, ScrollTrigger, SplitText, useGSAP };
 export type MotionRuntime = typeof import("./runtime");

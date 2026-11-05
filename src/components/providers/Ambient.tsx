@@ -8,7 +8,6 @@ import { useMotion } from "@/components/providers/MotionProvider";
 /**
  * Site-wide "always moving" layer (Full tier only; reduced motion keeps everything static):
  *   - scroll progress bar at the top
- *   - big headlines drift sideways as they cross the screen
  *   - figures tilt toward the pointer
  *   - the seal turns with the page
  * The pinned areas scene is left alone: transforms there fight the pin.
@@ -39,21 +38,6 @@ export function Ambient() {
       if (!main) return;
       const free = (el: Element) => !el.closest("#areas");
 
-      // Headlines drift sideways while crossing the viewport.
-      Array.from(main.querySelectorAll<HTMLElement>(".type-headline"))
-        .filter(free)
-        .forEach((h) => {
-          gsap.fromTo(
-            h,
-            { x: -36 },
-            {
-              x: 36,
-              ease: "none",
-              scrollTrigger: { trigger: h, start: "top bottom", end: "bottom top", scrub: 0.8 },
-            },
-          );
-        });
-
       // Figures: pointer tilt only (no scroll-coupled transforms, they made the page feel unstable).
       Array.from(main.querySelectorAll<HTMLElement>("figure"))
         .filter(free)
@@ -78,14 +62,19 @@ export function Ambient() {
           });
         });
 
-      // Seal turns with the page.
+      // Seal turns as it scrolls into view and lands upright (360°) once it is at rest,
+      // so the lettering is never left flipped when the visitor stops on it.
       document.querySelectorAll<SVGElement>("[data-spin]").forEach((seal) => {
-        gsap.to(seal, {
-          rotation: 360,
-          ease: "none",
-          transformOrigin: "50% 50%",
-          scrollTrigger: { trigger: seal, start: "top bottom", end: "bottom top", scrub: 1 },
-        });
+        gsap.fromTo(
+          seal,
+          { rotation: 0 },
+          {
+            rotation: 360,
+            ease: "power2.out",
+            transformOrigin: "50% 50%",
+            scrollTrigger: { trigger: seal, start: "top bottom", end: "top 60%", scrub: 0.8 },
+          },
+        );
       });
     });
 

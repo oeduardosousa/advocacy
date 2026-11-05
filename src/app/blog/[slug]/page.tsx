@@ -78,6 +78,7 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
               alt={post.coverAlt}
               ratio="aspect-[16/9]"
               sizes="(min-width: 1024px) 70vw, 100vw"
+              priority
               parallax
             />
             <p className="type-small mt-3 text-ink-mute">Imagem ilustrativa de demonstração.</p>

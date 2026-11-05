@@ -16,6 +16,7 @@ export function Photo({
   parallax = false,
   className = "",
   hoverZoom = false,
+  priority = false,
 }: {
   src: string;
   alt: string;
@@ -24,6 +25,8 @@ export function Photo({
   parallax?: boolean;
   className?: string;
   hoverZoom?: boolean;
+  /** LCP image: eager + high fetch priority + preload. */
+  priority?: boolean;
 }) {
   return (
     <div data-image-reveal className={`relative overflow-hidden bg-paper-deep ${ratio} ${className}`}>
@@ -36,6 +39,7 @@ export function Photo({
             name={src}
             alt={alt}
             sizes={sizes}
+            priority={priority}
             className={`object-cover ${hoverZoom ? "transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]" : ""}`}
           />
         </div>

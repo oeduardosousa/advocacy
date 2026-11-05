@@ -8,6 +8,13 @@ import { TransitionLink } from "@/components/providers/PageTransition";
 import { ArrowRight, WhatsAppGlyph } from "@/components/ui/icons";
 import { whenVeilDone } from "@/lib/motion/gate";
 import { dur, ease, LITE_STAGGER_FACTOR, scale, shift, stagger } from "@/lib/motion/tokens";
+import {
+  COVER_DIRECTIONS,
+  pickVariant,
+  splitType,
+  titleTween,
+  type TitleVariant,
+} from "@/lib/motion/variants";
 import { ROUTES } from "@/lib/site";
 
 /**
@@ -40,15 +47,16 @@ export function Hero() {
       const k = lite ? LITE_STAGGER_FACTOR : 1;
       const tl = gsap.timeline({ defaults: { ease: ease.out } });
 
+      // Different entrance on every visit (never the same twice in a row). Lite keeps it simple.
+      const variant: TitleVariant = lite ? "cascade" : pickVariant();
       const split = SplitText.create(title, {
-        type: "lines",
-        mask: "lines",
+        type: splitType(),
         linesClass: "hero-line",
-        maskClass: "line-mask",
       });
 
       // 1. Typeset
-      tl.from(split.lines, { yPercent: shift.text, duration: dur.reveal, stagger: stagger.lines * k }, 0.2);
+      const entrance = titleTween(variant, split, k);
+      tl.from(entrance.targets, entrance.vars, 0.2);
 
       // 2. Rule (desktop margin) + numerals
       if (rule) tl.fromTo(rule, { scaleY: 0 }, { scaleY: 1, duration: dur.reveal }, 0.6);
@@ -65,7 +73,15 @@ export function Hero() {
           // Visible from first paint (mobile LCP): no cover, no entrance animation.
           if (cover) gsap.set(cover, { display: "none" });
         } else {
-          if (cover) tl.fromTo(cover, { scaleY: 1 }, { scaleY: 0, duration: dur.scene, ease: ease.drawer }, 0.8);
+          const dir = COVER_DIRECTIONS[Math.floor(Math.random() * COVER_DIRECTIONS.length)];
+          if (cover) {
+            tl.fromTo(
+              cover,
+              { [dir.prop]: 1, transformOrigin: dir.origin },
+              { [dir.prop]: 0, duration: dur.scene, ease: ease.drawer },
+              0.8,
+            );
+          }
           tl.fromTo(image, { scale: scale.develop }, { scale: 1, duration: dur.scene, ease: ease.drawer }, 0.8);
         }
       } else if (cover) {
