@@ -708,3 +708,156 @@ html[data-veil-go] .veil {
     display: none;
   }
 }
+
+/* =====================================================================
+   Inner pages
+   ===================================================================== */
+
+/* ---- Index rows (areas, related reads): arrow nudges, never anything heavier ---- */
+.row-link {
+  display: grid;
+  width: 100%;
+}
+.row-arrow {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .row-link:hover .row-arrow {
+    transform: translateX(4px);
+  }
+  .row-link:hover .row-arrow-up {
+    transform: translate(4px, -4px);
+  }
+}
+.row-link:active .row-arrow {
+  transform: translateX(2px);
+  transition-duration: var(--dur-instant);
+}
+@media (prefers-reduced-motion: reduce) {
+  .row-arrow {
+    transition: none;
+  }
+  .row-link:hover .row-arrow,
+  .row-link:hover .row-arrow-up,
+  .row-link:active .row-arrow {
+    transform: none;
+  }
+}
+
+/* ---- Title link: hairline underline draws left to right, like .link-quiet ---- */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  transition: background-size var(--dur-base) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .group:hover .link-underline,
+  .link-underline:hover {
+    background-size: 100% 1px;
+  }
+}
+@media (hover: none) {
+  .link-underline:active {
+    background-size: 100% 1px;
+    transition-duration: var(--dur-instant);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .link-underline {
+    transition: none;
+  }
+}
+
+/* ---- Filter chip (blog tags): 44px target, Ink fill when pressed ---- */
+.chip {
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid var(--color-ink-mute);
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: var(--text-label--letter-spacing);
+  text-transform: uppercase;
+  color: var(--color-ink);
+  touch-action: manipulation;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    transform 120ms var(--ease-out);
+}
+.chip[aria-pressed="true"] {
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-paper);
+}
+.chip:active {
+  transform: scale(var(--press-scale));
+}
+@media (hover: hover) and (pointer: fine) {
+  .chip[aria-pressed="false"]:hover {
+    border-color: var(--color-ink);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chip:active {
+    transform: none;
+  }
+}
+
+/* ---- Filtered rows enter with a short fade + rise, staggered (70ms) ---- */
+@keyframes row-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--shift-fade));
+  }
+}
+.post-row {
+  animation: row-in 400ms var(--ease-out) both;
+  animation-delay: calc(min(var(--i, 0), 6) * 50ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .post-row {
+    animation: fade-only 200ms linear both;
+    animation-delay: 0s;
+  }
+}
+@keyframes fade-only {
+  from {
+    opacity: 0;
+  }
+}
+
+/* ---- Reading progress (articles): oxblood hairline drawn with the scroll ---- */
+.reading-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 60;
+  height: 2px;
+  pointer-events: none;
+}
+.reading-progress-bar {
+  height: 100%;
+  background: var(--color-oxblood);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reading-progress {
+    display: none;
+  }
+}
+
+/* ---- Article reading rhythm ---- */
+.article-body > p:first-of-type {
+  font-size: 1.375rem;
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+@media (max-width: 639px) {
+  .article-body .type-article {
+    font-size: 1.125rem;
+  }
+}
