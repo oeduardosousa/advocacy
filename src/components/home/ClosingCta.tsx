@@ -25,7 +25,7 @@ export function ClosingCta() {
             Conte o seu contexto e vamos <em className="italic">conversar com calma.</em>
           </h2>
 
-          <div className="col-span-4 sm:col-span-6 lg:col-span-5 lg:col-start-3">
+          <div className="col-span-4 sm:col-span-6 lg:col-span-7 lg:col-start-3">
             <p data-reveal="block" className="type-lead text-ink-dim">
               O primeiro contato é pelo WhatsApp. Se preferir, agende um horário para conversar.
             </p>

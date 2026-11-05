@@ -170,9 +170,6 @@ export function Hero() {
               data-hero-rule
               className="absolute bottom-0 right-0 top-0 w-px origin-top bg-oxblood"
             />
-            <p data-hero-marginal className="type-label absolute right-6 top-2 text-ink-mute">
-              01
-            </p>
             <p
               data-hero-marginal
               className="type-small absolute bottom-0 right-6 max-w-[16ch] text-right text-ink-mute"
@@ -184,7 +181,7 @@ export function Hero() {
           {/* Thesis */}
           <div className="col-span-4 sm:col-span-8 lg:col-span-10">
             <p className="type-label settle mb-8 text-ink-mute lg:hidden">
-              01 — Escritório de advocacia
+              Escritório de advocacia
             </p>
             <p className="type-label settle mb-8 hidden text-ink-mute lg:block">
               Escritório de advocacia · Projeto conceito
@@ -195,7 +192,7 @@ export function Hero() {
           </div>
 
           {/* Lead and actions */}
-          <div className="col-span-4 self-end sm:col-span-5 lg:col-span-5 lg:col-start-3">
+          <div className="col-span-4 self-end sm:col-span-5 lg:col-span-4 lg:col-start-3">
             <p data-hero-block className="type-lead text-ink-soft">
               Seis áreas do direito, atendimento próximo e linguagem clara. Conte o seu contexto: analisamos
               com cuidado e explicamos cada etapa.
@@ -221,8 +218,8 @@ export function Hero() {
           </div>
 
           {/* Photograph (demo illustration) */}
-          <figure className="col-span-4 sm:col-span-8 lg:col-span-5 lg:col-start-8 lg:self-end">
-            <div className="relative aspect-[3/2] overflow-hidden bg-paper-deep">
+          <figure className="col-span-4 sm:col-span-8 lg:col-span-6 lg:col-start-7 lg:self-end">
+            <div className="relative aspect-[3/2] overflow-hidden lg:aspect-[16/10] bg-paper-deep">
               <div data-hero-image className="absolute inset-0">
                 <Image
                   src="/img/hero-demo.svg"

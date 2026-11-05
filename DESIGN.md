@@ -282,6 +282,9 @@ Ink ground, Ink Dim text, Oxblood-on-Ink for links on hover. Contains wordmark, 
 ### Marginalia (signature component)
 Numerals (01 to 06), thin oxblood vertical rule that draws as the page scrolls (scaleY scrubbed to scroll progress), and short Small-size notes in the margin column. Decorative, `aria-hidden`, absent on mobile except the inline numeral.
 
+### Critique revision (landing page)
+Section numerals (01 to 06) were dropped from the home sheets: lists inside sections (areas 01-06, approach 01-04) carry their own numbering and the two systems collided. The margin keeps a plain text label, the drawn rule and notes. Italic emphasis in headlines is reserved for the hero, the positioning statement and the closing band, so it reads as a rhythm and not a template.
+
 ## Do's and Don'ts
 
 ### Do

@@ -71,11 +71,11 @@ export function Areas({ areas }: { areas: Area[] }) {
         <div className="grid grid-cols-4 gap-x-4 sm:grid-cols-8 sm:gap-x-5 lg:grid-cols-12 lg:gap-x-6">
           {/* Margin: inline numeral on small screens, advancing numeral when pinned */}
           <p className="type-label col-span-4 mb-6 text-ink-mute sm:col-span-8 lg:col-span-2 lg:mb-0 lg:text-right">
-            03 — Áreas de atuação
+            Áreas de atuação
           </p>
           <div className="col-span-4 sm:col-span-8 lg:col-span-10">
             <h2 id="areas-title" data-reveal="lines" className="type-headline">
-              Áreas em que <em className="italic">atuamos.</em>
+              Áreas em que atuamos.
             </h2>
           </div>
 

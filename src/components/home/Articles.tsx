@@ -33,18 +33,22 @@ export function Articles({ posts }: { posts: Post[] }) {
       <div className="container-page section-major border-t border-rule">
         <div className="grid grid-cols-4 gap-x-4 gap-y-12 sm:grid-cols-8 sm:gap-x-5 lg:grid-cols-12 lg:gap-x-6">
           <p className="type-label col-span-4 text-ink-mute sm:col-span-8 lg:col-span-2 lg:text-right">
-            06 — Insights
+            Insights
           </p>
           <h2
             id="articles-title"
             data-reveal="lines"
             className="type-headline col-span-4 sm:col-span-8 lg:col-span-9"
           >
-            Textos para <em className="italic">entender melhor.</em>
+            Textos para entender melhor.
           </h2>
 
           <div className="col-span-4 sm:col-span-8 lg:col-span-6 lg:col-start-3">
             <PostCard post={first} index={0} large />
+            <TransitionLink href={ROUTES.blog} className="link-quiet mt-10 text-ink">
+              Ver todos os artigos
+              <ArrowRight />
+            </TransitionLink>
           </div>
           <div className="col-span-4 flex flex-col gap-12 sm:col-span-8 lg:col-span-4 lg:col-start-9 lg:mt-24">
             {rest.map((post, i) => (
@@ -52,12 +56,6 @@ export function Articles({ posts }: { posts: Post[] }) {
             ))}
           </div>
 
-          <div className="col-span-4 sm:col-span-8 lg:col-span-4 lg:col-start-3">
-            <TransitionLink href={ROUTES.blog} className="link-quiet text-ink">
-              Ver todos os artigos
-              <ArrowRight />
-            </TransitionLink>
-          </div>
         </div>
       </div>
     </section>
