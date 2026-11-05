@@ -132,7 +132,7 @@ export function Areas({ areas }: { areas: Area[] }) {
                     ) : (
                       <button
                         type="button"
-                        className="-mr-3 -mt-1 flex h-11 w-11 items-center justify-center text-ink"
+                        className="-mr-3 -mt-1 flex h-11 w-11 items-center justify-center text-ink transition-transform duration-[120ms] ease-out active:scale-[0.9]"
                         aria-expanded={expanded}
                         aria-controls={panelId}
                         onClick={() => setOpen(expanded ? null : area.slug)}
@@ -148,7 +148,7 @@ export function Areas({ areas }: { areas: Area[] }) {
                   {!pinned ? (
                     <div
                       id={panelId}
-                      className="grid transition-[grid-template-rows] duration-[320ms] ease-drawer"
+                      className={`grid transition-[grid-template-rows] ease-drawer ${expanded ? "duration-[320ms]" : "duration-[200ms]"}`}
                       style={{ gridTemplateRows: expanded ? "1fr" : "0fr" }}
                       inert={!expanded}
                     >
@@ -159,6 +159,7 @@ export function Areas({ areas }: { areas: Area[] }) {
                             alt={`Ilustração de demonstração para ${area.name}`}
                             fill
                             sizes="(min-width: 640px) 80vw, 100vw"
+                            loading="eager"
                             className="object-cover"
                           />
                         </div>

@@ -380,6 +380,13 @@
     background-size: 100% 1px;
   }
 }
+/* Touch has no hover: the press draws the hairline so the tap is acknowledged. */
+@media (hover: none) {
+  .link-quiet:active {
+    background-size: 100% 1px;
+    transition-duration: var(--dur-instant);
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .link-quiet {
     transition: none;
@@ -450,10 +457,26 @@
   background: var(--color-paper-light);
   border-top: 1px solid var(--color-rule);
 }
-.sheet[data-lifted] {
+/* The shadow lives on a pseudo-element so it can fade (opacity) instead of popping in
+   and out; box-shadow itself is never animated. */
+.sheet::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
   box-shadow:
     0 -1px 0 rgb(20 17 15 / 0.06),
     0 -24px 48px -24px rgb(20 17 15 / 0.28);
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+.sheet[data-lifted]::before {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sheet::before {
+    display: none;
+  }
 }
 
 /* ---- Site navigation ---- */
@@ -530,8 +553,8 @@
   opacity: 1;
   transform: translateY(0);
   transition:
-    opacity 400ms var(--ease-out) calc(120ms + var(--i) * var(--stagger-items)),
-    transform 400ms var(--ease-out) calc(120ms + var(--i) * var(--stagger-items));
+    opacity 300ms var(--ease-out) calc(80ms + var(--i) * var(--stagger-items)),
+    transform 300ms var(--ease-out) calc(80ms + var(--i) * var(--stagger-items));
 }
 @media (prefers-reduced-motion: reduce) {
   .menu-sheet,

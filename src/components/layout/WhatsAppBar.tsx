@@ -29,7 +29,7 @@ export function WhatsAppBar() {
         href={CONTACT.whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="type-label flex h-14 items-center justify-center gap-3 text-paper active:opacity-90"
+        className="type-label flex h-14 items-center justify-center gap-3 text-paper transition-colors duration-100 ease-out active:bg-ink"
       >
         <WhatsAppGlyph />
         Conversar no WhatsApp

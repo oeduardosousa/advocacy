@@ -143,7 +143,7 @@ export function SiteNav() {
           <button
             ref={toggleRef}
             type="button"
-            className="type-label settle -mr-3 flex h-11 min-w-11 items-center px-3 text-ink lg:hidden"
+            className="type-label settle -mr-3 flex h-11 min-w-11 items-center px-3 text-ink transition-opacity duration-100 ease-out active:opacity-50 lg:hidden"
             aria-expanded={open}
             aria-controls="menu-mobile"
             onClick={() => setOpen((v) => !v)}
