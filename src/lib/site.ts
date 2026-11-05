@@ -11,8 +11,7 @@ export const SITE = {
 /** Demo contact points. All placeholders: no real number or profile exists. */
 export const CONTACT = {
   /** Fictional number (00). Replace before any real use. */
-  whatsappUrl:
-    "https://wa.me/5500000000000?text=Ol%C3%A1%2C%20vim%20pelo%20site%20(projeto%20conceito).",
+  whatsappNumber: "5500000000000",
   /** Placeholder scheduler (Cal.com embed). Replace with a real booking link before any real use. */
   schedulerUrl: "https://cal.com/demo?embed=true&layout=month_view",
   instagram: "#",
@@ -21,6 +20,11 @@ export const CONTACT = {
   address: ["Rua Exemplo, 000, sala 00", "Cidade Fictícia, UF 00000-000"],
   hours: "Segunda a sexta, 9h às 18h (horário de demonstração)",
 } as const;
+
+/** WhatsApp chat link with the visitor's message pre-filled. */
+export function whatsappLink(message: string): string {
+  return `https://wa.me/${CONTACT.whatsappNumber}?text=${encodeURIComponent(message)}`;
+}
 
 export const NAV_LINKS = [
   { label: "Sobre", href: "/sobre/" },
@@ -38,6 +42,7 @@ export const ROUTES = {
   team: "/equipe/",
   blog: "/blog/",
   contact: "/contato/",
+  message: "/fale-conosco/",
   privacy: "/politica-de-privacidade/",
   area: (slug: string) => `/areas-de-atuacao/${slug}/`,
   member: (slug: string) => `/equipe/${slug}/`,

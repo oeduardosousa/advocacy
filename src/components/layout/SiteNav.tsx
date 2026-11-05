@@ -5,9 +5,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { useMotion } from "@/components/providers/MotionProvider";
 import { TransitionLink } from "@/components/providers/PageTransition";
-import { Magnetic } from "@/components/ui/Magnetic";
 import { WhatsAppGlyph } from "@/components/ui/icons";
-import { CONTACT, NAV_LINKS, ROUTES, SITE } from "@/lib/site";
+import { NAV_LINKS, ROUTES, SITE } from "@/lib/site";
 
 const SCROLLED_AFTER = 80;
 const HIDE_AFTER = 200;
@@ -126,18 +125,10 @@ export function SiteNav() {
                 </li>
               ))}
             </ul>
-            <Magnetic>
-              <a
-                href={CONTACT.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-whatsapp"
-              >
-                <WhatsAppGlyph />
-                WhatsApp
-                <span className="sr-only">(abre em nova aba)</span>
-              </a>
-            </Magnetic>
+            <TransitionLink href={ROUTES.message} className="btn btn-whatsapp">
+              <WhatsAppGlyph />
+              Fale Conosco
+            </TransitionLink>
           </nav>
 
           <button

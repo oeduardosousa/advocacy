@@ -49,10 +49,9 @@ export function Footer() {
             <p className="type-label mb-3 text-paper">Contato</p>
             <ul className="type-small">
               <li>
-                <a href={CONTACT.whatsappUrl} target="_blank" rel="noopener noreferrer" className={linkClass}>
-                  WhatsApp
-                  <span className="sr-only">(abre em nova aba)</span>
-                </a>
+                <TransitionLink href={ROUTES.message} className={linkClass}>
+                  Fale Conosco
+                </TransitionLink>
               </li>
               <li>
                 <a href={CONTACT.instagram} className={linkClass}>

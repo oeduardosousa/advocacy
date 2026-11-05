@@ -4,7 +4,6 @@ import { Scheduler } from "@/components/contact/Scheduler";
 import { HomeMotion } from "@/components/home/HomeMotion";
 import { Band, PageHeader } from "@/components/layout/PageHeader";
 import { TransitionLink } from "@/components/providers/PageTransition";
-import { Magnetic } from "@/components/ui/Magnetic";
 import { ArrowUpRight, WhatsAppGlyph } from "@/components/ui/icons";
 import { CONTACT, ROUTES, SITE } from "@/lib/site";
 
@@ -31,18 +30,10 @@ export default function ContactPage() {
         lead="O primeiro contato é pelo WhatsApp. Se preferir, escolha um horário na agenda."
       >
         <div data-reveal="block" className="mt-10 flex flex-wrap items-center gap-4">
-          <Magnetic>
-            <a
-              href={CONTACT.whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-whatsapp"
-            >
-              <WhatsAppGlyph />
-              Conversar no WhatsApp
-              <span className="sr-only">(abre em nova aba)</span>
-            </a>
-          </Magnetic>
+          <TransitionLink href={ROUTES.message} className="btn btn-whatsapp">
+            <WhatsAppGlyph />
+            Fale Conosco
+          </TransitionLink>
         </div>
         <p className="type-small mt-5 text-ink-mute">
           Contato de demonstração: o número é fictício e não recebe mensagens.

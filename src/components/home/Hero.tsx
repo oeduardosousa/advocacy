@@ -5,11 +5,10 @@ import { useEffect, useRef } from "react";
 
 import { useMotion } from "@/components/providers/MotionProvider";
 import { TransitionLink } from "@/components/providers/PageTransition";
-import { Magnetic } from "@/components/ui/Magnetic";
 import { ArrowRight, WhatsAppGlyph } from "@/components/ui/icons";
 import { whenVeilDone } from "@/lib/motion/gate";
 import { dur, ease, LITE_STAGGER_FACTOR, scale, shift, stagger } from "@/lib/motion/tokens";
-import { CONTACT, ROUTES } from "@/lib/site";
+import { ROUTES } from "@/lib/site";
 
 /**
  * "A Tese" — the signature moment (DESIGN.md).
@@ -198,18 +197,10 @@ export function Hero() {
               com cuidado e explicamos cada etapa.
             </p>
             <div data-hero-block className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-2">
-              <Magnetic className="hidden lg:inline-block">
-                <a
-                  href={CONTACT.whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-whatsapp settle"
-                >
-                  <WhatsAppGlyph />
-                  Conversar no WhatsApp
-                  <span className="sr-only">(abre em nova aba)</span>
-                </a>
-              </Magnetic>
+              <TransitionLink href={ROUTES.message} className="btn btn-whatsapp settle hidden lg:inline-flex">
+                <WhatsAppGlyph />
+                Fale Conosco
+              </TransitionLink>
               <TransitionLink href={ROUTES.areas} className="link-quiet text-ink">
                 Conhecer as áreas
                 <ArrowRight />

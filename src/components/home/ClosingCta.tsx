@@ -1,8 +1,7 @@
 import { TransitionLink } from "@/components/providers/PageTransition";
-import { Magnetic } from "@/components/ui/Magnetic";
 import { Seal } from "@/components/ui/Seal";
 import { WhatsAppGlyph } from "@/components/ui/icons";
-import { CONTACT, ROUTES } from "@/lib/site";
+import { ROUTES } from "@/lib/site";
 
 /** Closing band: the one deliberate Ink section besides the footer (The Dark Is a Section Rule). */
 export function ClosingCta() {
@@ -30,18 +29,10 @@ export function ClosingCta() {
               O primeiro contato é pelo WhatsApp. Se preferir, agende um horário para conversar.
             </p>
             <div data-reveal="block" className="mt-10 flex flex-wrap items-center gap-4">
-              <Magnetic>
-                <a
-                  href={CONTACT.whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-whatsapp border-oxblood-on-ink"
-                >
-                  <WhatsAppGlyph />
-                  Conversar no WhatsApp
-                  <span className="sr-only">(abre em nova aba)</span>
-                </a>
-              </Magnetic>
+              <TransitionLink href={ROUTES.message} className="btn btn-whatsapp border-oxblood-on-ink">
+                <WhatsAppGlyph />
+                Fale Conosco
+              </TransitionLink>
               <TransitionLink href={ROUTES.contact} className="btn btn-secondary-ink">
                 Agendar uma conversa
               </TransitionLink>

@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 
 import { WhatsAppGlyph } from "@/components/ui/icons";
-import { CONTACT } from "@/lib/site";
+import { TransitionLink } from "@/components/providers/PageTransition";
+import { ROUTES } from "@/lib/site";
 
 /**
  * Persistent mobile WhatsApp action: 56px, safe-area padded, hidden while the on-screen
@@ -25,16 +26,13 @@ export function WhatsAppBar() {
       className="wa-bar fixed inset-x-0 bottom-0 z-40 bg-oxblood lg:hidden"
       hidden={keyboardOpen}
     >
-      <a
-        href={CONTACT.whatsappUrl}
-        target="_blank"
-        rel="noopener noreferrer"
+      <TransitionLink
+        href={ROUTES.message}
         className="type-label flex h-14 items-center justify-center gap-3 text-paper transition-colors duration-100 ease-out active:bg-ink"
       >
         <WhatsAppGlyph />
-        Conversar no WhatsApp
-        <span className="sr-only">(abre em nova aba)</span>
-      </a>
+        Fale Conosco
+      </TransitionLink>
     </div>
   );
 }
