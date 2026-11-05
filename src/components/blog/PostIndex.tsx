@@ -3,8 +3,8 @@
 import { useMemo, useState } from "react";
 
 import { TransitionLink } from "@/components/providers/PageTransition";
-import Image from "next/image";
-import { formatDate, postImage, topicTag } from "@/lib/demo-images";
+import { Img } from "@/components/ui/Img";
+import { formatDate, topicTag } from "@/lib/demo-images";
 import { ROUTES } from "@/lib/site";
 
 export interface PostSummary {
@@ -14,6 +14,8 @@ export interface PostSummary {
   date: string;
   tags: string[];
   readingTimeMinutes: number;
+  cover: string;
+  coverAlt: string;
 }
 
 /**
@@ -28,7 +30,6 @@ export function PostIndex({ posts, tags }: { posts: PostSummary[]; tags: string[
     () => (tag ? posts.filter((post) => post.tags.includes(tag)) : posts),
     [posts, tag],
   );
-  const imageIndex = (slug: string) => posts.findIndex((post) => post.slug === slug);
 
   return (
     <>
@@ -59,10 +60,9 @@ export function PostIndex({ posts, tags }: { posts: PostSummary[]; tags: string[
             <article className="group grid grid-cols-4 gap-x-4 gap-y-5 py-8 sm:grid-cols-8 sm:gap-x-5 lg:grid-cols-10 lg:gap-x-6 lg:py-10">
               <div className="col-span-4 sm:col-span-3 lg:col-span-3">
                 <div className="relative aspect-[3/2] overflow-hidden bg-paper-deep">
-                  <Image
-                    src={postImage(imageIndex(post.slug))}
+                  <Img
+                    name={post.cover}
                     alt=""
-                    fill
                     sizes="(min-width: 1024px) 24vw, (min-width: 640px) 36vw, 100vw"
                     className="object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
                   />

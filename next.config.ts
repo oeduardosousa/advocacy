@@ -5,9 +5,12 @@ const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
   images: {
-    // next/image optimization needs a server; images are optimized offline
-    // and committed (AVIF/WebP), see DESIGN.md "Imagery".
-    unoptimized: true,
+    // No image server in a static export: images are optimized offline (npm run images)
+    // into AVIF/WebP at fixed widths and resolved by a custom loader (DESIGN.md "Imagery").
+    loader: "custom",
+    loaderFile: "./src/lib/image-loader.ts",
+    deviceSizes: [480, 800, 1200, 1600],
+    imageSizes: [],
   },
   reactStrictMode: true,
 };

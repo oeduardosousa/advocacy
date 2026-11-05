@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Img } from "@/components/ui/Img";
 
 /**
  * Framed photograph with the "paper cover" reveal and optional parallax (DESIGN.md).
@@ -32,10 +32,9 @@ export function Photo({
         className={parallax ? "absolute inset-x-0 -top-[8%] h-[116%]" : "absolute inset-0"}
       >
         <div data-image-settle className="absolute inset-0">
-          <Image
-            src={src}
+          <Img
+            name={src}
             alt={alt}
-            fill
             sizes={sizes}
             className={`object-cover ${hoverZoom ? "transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]" : ""}`}
           />

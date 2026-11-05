@@ -49,7 +49,7 @@ export function Approach() {
 
           <div className="col-span-4 sm:col-span-5 lg:col-span-4 lg:col-start-3">
             <Photo
-              src="/img/demo/approach.svg"
+              src="approach"
               alt="Ilustração de demonstração: feixe de luz sobre uma parede, com folhas de papel sobre uma mesa."
               ratio="aspect-[4/5]"
               parallax

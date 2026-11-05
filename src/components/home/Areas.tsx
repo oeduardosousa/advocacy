@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Img } from "@/components/ui/Img";
 import { useEffect, useId, useRef, useState } from "react";
 
 import { useMotion } from "@/components/providers/MotionProvider";
@@ -11,8 +11,17 @@ import { ROUTES } from "@/lib/site";
 
 const PIN_VIEWPORTS = 2.4; // stays under the 4-viewport pin budget
 
+/** Each photograph wipes in from a different side and slowly pushes into its own focal point. */
+const WIPES = [
+  "inset(0 0 100% 0)",
+  "inset(0 100% 0 0)",
+  "inset(100% 0 0 0)",
+  "inset(0 0 0 100%)",
+];
+const FOCI = ["70% 38%", "28% 62%", "52% 30%", "38% 72%", "66% 66%", "30% 34%"];
+
 function areaImage(slug: string) {
-  return `/img/demo/area-${slug}.svg`;
+  return `area-${slug}`;
 }
 
 /**
@@ -93,7 +102,7 @@ export function Areas({ areas }: { areas: Area[] }) {
 
           <ul
             className={`col-span-4 mt-10 sm:col-span-8 lg:mt-8 ${
-              pinned ? "lg:col-span-7" : "lg:col-span-10"
+              pinned ? "lg:col-span-5" : "lg:col-span-10"
             }`}
           >
             {areas.map((area, i) => {
@@ -103,10 +112,22 @@ export function Areas({ areas }: { areas: Area[] }) {
               return (
                 <li
                   key={area.slug}
-                  className="border-t border-rule last:border-b"
+                  className="relative border-t border-rule last:border-b"
                   onMouseEnter={pinned ? () => setActive(i) : undefined}
                 >
-                  <div className="grid grid-cols-[2.5rem_1fr_auto] items-start gap-x-4 py-5 lg:py-3.5 sm:grid-cols-[3.5rem_1fr_auto]">
+                  {pinned ? (
+                    <span
+                      aria-hidden="true"
+                      className={`absolute -left-4 bottom-3 top-3 w-[3px] origin-top bg-oxblood transition-transform duration-[500ms] ease-drawer ${
+                        isActive ? "scale-y-100" : "scale-y-0"
+                      }`}
+                    />
+                  ) : null}
+                  <div
+                    className={`grid grid-cols-[2.5rem_1fr_auto] items-start gap-x-4 py-5 sm:grid-cols-[3.5rem_1fr_auto] lg:py-3.5 ${
+                      pinned ? "transition-transform duration-[500ms] ease-drawer" : ""
+                    } ${isActive ? "lg:translate-x-3" : ""}`}
+                  >
                     <span
                       className={`type-label pt-3 tabular-nums transition-colors duration-[160ms] ${
                         isActive ? "text-oxblood" : "text-ink-mute"
@@ -117,13 +138,17 @@ export function Areas({ areas }: { areas: Area[] }) {
                     <div>
                       <TransitionLink
                         href={ROUTES.area(area.slug)}
-                        className={`type-title inline-block py-1 transition-colors duration-[160ms] ${
-                          pinned && !isActive ? "text-ink-mute" : "text-ink"
+                        className={`type-title inline-block origin-left py-1 transition-[transform,color] duration-[500ms] ease-drawer ${
+                          !pinned ? "text-ink" : isActive ? "scale-[1.14] text-oxblood" : "text-ink-mute"
                         }`}
                       >
                         {area.name}
                       </TransitionLink>
-                      <p className={`type-small mt-1 max-w-[70ch] text-ink-mute ${compact && !isActive ? "hidden" : ""}`}>{area.summary}</p>
+                      <p
+                        className={`type-small mt-1 max-w-[70ch] transition-colors duration-[500ms] ease-drawer ${
+                          isActive ? "text-ink" : "text-ink-mute"
+                        } ${compact && !isActive ? "hidden" : ""}`}
+                      >{area.summary}</p>
                     </div>
                     {pinned ? (
                       <ArrowUpRight
@@ -155,10 +180,9 @@ export function Areas({ areas }: { areas: Area[] }) {
                     >
                       <div className="overflow-hidden">
                         <div className="relative mb-6 aspect-[3/2] sm:ml-[3.5rem]">
-                          <Image
-                            src={areaImage(area.slug)}
+                          <Img
+                            name={areaImage(area.slug)}
                             alt={`Ilustração de demonstração para ${area.name}`}
-                            fill
                             sizes="(min-width: 640px) 80vw, 100vw"
                             loading="eager"
                             className="object-cover"
@@ -173,20 +197,47 @@ export function Areas({ areas }: { areas: Area[] }) {
           </ul>
 
           {pinned ? (
-            <div className="relative lg:col-span-3 lg:col-start-10 lg:mt-8">
-              <div className="relative aspect-[4/5] overflow-hidden bg-paper-deep">
-                {areas.map((area, i) => (
-                  <Image
-                    key={area.slug}
-                    src={areaImage(area.slug)}
-                    alt={i === active ? `Ilustração de demonstração para ${area.name}` : ""}
-                    aria-hidden={i === active ? undefined : true}
-                    fill
-                    sizes="30vw"
-                    className="object-cover transition-opacity duration-[480ms] ease-out"
-                    style={{ opacity: i === active ? 1 : 0 }}
-                  />
-                ))}
+            <div className="relative lg:col-span-5 lg:mt-8">
+              <div className="relative h-[min(66svh,41rem)] overflow-hidden bg-paper-deep">
+                {areas.map((area, i) => {
+                  const on = i === active;
+                  return (
+                    <div
+                      key={area.slug}
+                      className="area-shot absolute inset-0"
+                      data-on={on ? "" : undefined}
+                      style={
+                        {
+                          "--wipe": WIPES[i % WIPES.length],
+                          "--focus": FOCI[i % FOCI.length],
+                          zIndex: on ? 2 : 1,
+                        } as React.CSSProperties
+                      }
+                    >
+                      <Img
+                        name={areaImage(area.slug)}
+                        alt={on ? `Ilustração de demonstração para ${area.name}` : ""}
+                        aria-hidden={on ? undefined : true}
+                        sizes="45vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  );
+                })}
+                <div
+                  key={active}
+                  aria-hidden="true"
+                  className="area-caption pointer-events-none absolute inset-x-0 bottom-0 z-10 flex items-end justify-between gap-4 bg-gradient-to-t from-ink/70 to-transparent p-5 text-paper"
+                >
+                  <span className="type-label">{areas[active]?.name}</span>
+                  <span className="font-serif text-3xl leading-none tabular-nums">{pad(active)}</span>
+                </div>
+              </div>
+              <div aria-hidden="true" className="mt-3 h-px w-full bg-rule">
+                <div
+                  className="h-px origin-left bg-oxblood transition-transform duration-[600ms] ease-drawer"
+                  style={{ transform: `scaleX(${(active + 1) / areas.length})` }}
+                />
               </div>
               <p className="type-small mt-3 text-ink-mute">Imagens ilustrativas de demonstração.</p>
             </div>

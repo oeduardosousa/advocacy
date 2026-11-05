@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Img } from "@/components/ui/Img";
 import { useEffect, useRef } from "react";
 
 import { useMotion } from "@/components/providers/MotionProvider";
@@ -212,10 +212,9 @@ export function Hero() {
           <figure className="col-span-4 sm:col-span-8 lg:col-span-6 lg:col-start-7 lg:self-end">
             <div className="relative aspect-[3/2] overflow-hidden lg:aspect-[16/10] bg-paper-deep">
               <div data-hero-image className="absolute inset-0">
-                <Image
-                  src="/img/hero-demo.svg"
+                <Img
+                  name="hero"
                   alt="Ilustração de demonstração: luz de janela sobre uma mesa, com folhas de papel e uma caneta-tinteiro."
-                  fill
                   priority
                   sizes="(min-width: 1024px) 40vw, 100vw"
                   className="object-cover"

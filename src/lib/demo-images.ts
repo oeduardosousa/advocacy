@@ -3,13 +3,11 @@
  * so the mapping is derived here and stays deterministic (same slug, same image).
  */
 
-export const areaImage = (slug: string) => `/img/demo/area-${slug}.svg`;
+export const areaImage = (slug: string) => `area-${slug}`;
 
 /** Portraits 1..4, assigned by the member's order (1-based, wrapping). */
-export const portraitImage = (order: number) => `/img/demo/portrait-${((order - 1) % 4) + 1}.svg`;
+export const portraitImage = (order: number) => `portrait-${((order - 1) % 4) + 1}`;
 
-/** Post illustrations 1..3, assigned by the post's position in the list. */
-export const postImage = (index: number) => `/img/demo/post-${(index % 3) + 1}.svg`;
 
 /** Format an ISO date (YYYY-MM-DD) as "15 de janeiro de 2025" without timezone drift. */
 export function formatDate(iso: string): string {

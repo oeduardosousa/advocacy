@@ -4,12 +4,12 @@ import { Photo } from "@/components/ui/Photo";
 import type { Post } from "@/lib/content";
 import { ROUTES } from "@/lib/site";
 
-function PostCard({ post, index, large }: { post: Post; index: number; large?: boolean }) {
+function PostCard({ post, large }: { post: Post; large?: boolean }) {
   return (
     <article className="group">
       <Photo
-        src={`/img/demo/post-${(index % 3) + 1}.svg`}
-        alt=""
+        src={post.cover}
+        alt={post.coverAlt}
         sizes={large ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 33vw, 100vw"}
         hoverZoom
       />
@@ -44,15 +44,15 @@ export function Articles({ posts }: { posts: Post[] }) {
           </h2>
 
           <div className="col-span-4 sm:col-span-8 lg:col-span-6 lg:col-start-3">
-            <PostCard post={first} index={0} large />
+            <PostCard post={first} large />
             <TransitionLink href={ROUTES.blog} className="link-quiet mt-10 text-ink">
               Ver todos os artigos
               <ArrowRight />
             </TransitionLink>
           </div>
           <div className="col-span-4 flex flex-col gap-12 sm:col-span-8 lg:col-span-4 lg:col-start-9 lg:mt-24">
-            {rest.map((post, i) => (
-              <PostCard key={post.slug} post={post} index={i + 1} />
+            {rest.map((post) => (
+              <PostCard key={post.slug} post={post} />
             ))}
           </div>
 

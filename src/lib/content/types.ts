@@ -22,6 +22,10 @@ export interface Post extends BaseEntry {
   author?: string;
   /** Whole minutes, computed from the body. */
   readingTimeMinutes: number;
+  /** Logical cover image name (see assets/images-src). */
+  cover: string;
+  /** Meaningful pt-BR alt text for the cover. */
+  coverAlt: string;
 }
 
 export interface TeamMember extends BaseEntry {
@@ -34,6 +38,8 @@ export interface TeamMember extends BaseEntry {
   order: number;
   /** Alt text for the (fictional) portrait, when one exists. */
   portraitAlt?: string;
+  /** Slugs of the practice areas the member works in. */
+  areas: string[];
 }
 
 export interface Area extends BaseEntry {

@@ -12,13 +12,15 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  const posts = getPosts().map(({ slug, title, summary, date, tags, readingTimeMinutes }) => ({
+  const posts = getPosts().map(({ slug, title, summary, date, tags, readingTimeMinutes, cover, coverAlt }) => ({
     slug,
     title,
     summary,
     date,
     tags,
     readingTimeMinutes,
+    cover,
+    coverAlt,
   }));
   const tags = getPostTags().filter((tag) => tag !== "Demonstração");
 

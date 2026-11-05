@@ -2,6 +2,7 @@ import { TransitionLink } from "@/components/providers/PageTransition";
 import { ArrowRight } from "@/components/ui/icons";
 import { Photo } from "@/components/ui/Photo";
 import type { TeamMember } from "@/lib/content";
+import { portraitImage } from "@/lib/demo-images";
 import { ROUTES } from "@/lib/site";
 
 // Uneven editorial grid: one tall, one short, in alternation (DESIGN.md Layout).
@@ -36,7 +37,7 @@ export function Team({ members }: { members: TeamMember[] }) {
               className={`col-span-4 grid grid-cols-[6.5rem_1fr] items-start gap-x-5 sm:col-span-4 sm:block ${SLOTS[i]}`}
             >
               <Photo
-                src={`/img/demo/portrait-${i + 1}.svg`}
+                src={portraitImage(member.order)}
                 alt={member.portraitAlt ?? "Retrato fictício de demonstração"}
                 ratio="aspect-[4/5]"
                 sizes="(min-width: 1024px) 28vw, 50vw"

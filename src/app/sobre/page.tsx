@@ -68,7 +68,7 @@ export default function AboutPage() {
         </div>
         <div className="col-span-4 sm:col-span-5 lg:col-span-4 lg:col-start-9">
           <Photo
-            src="/img/demo/post-2.svg"
+            src="post-2"
             alt="Ilustração de demonstração: folhas de papel e luz de janela sobre uma mesa."
             ratio="aspect-[4/5]"
             sizes="(min-width: 1024px) 30vw, 80vw"

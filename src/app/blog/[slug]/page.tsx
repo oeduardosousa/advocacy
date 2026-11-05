@@ -10,7 +10,7 @@ import { TransitionLink } from "@/components/providers/PageTransition";
 import { ArrowRight } from "@/components/ui/icons";
 import { Photo } from "@/components/ui/Photo";
 import { getArea, getPost, getPosts, getTeamMember } from "@/lib/content";
-import { formatDate, postImage, topicTag } from "@/lib/demo-images";
+import { formatDate, topicTag } from "@/lib/demo-images";
 import { ROUTES, SITE } from "@/lib/site";
 
 type Params = { slug: string };
@@ -74,8 +74,8 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
         <div className="grid grid-cols-4 gap-x-4 sm:grid-cols-8 sm:gap-x-5 lg:grid-cols-12 lg:gap-x-6">
           <div className="col-span-4 sm:col-span-8 lg:col-span-9 lg:col-start-3">
             <Photo
-              src={postImage(index)}
-              alt=""
+              src={post.cover}
+              alt={post.coverAlt}
               ratio="aspect-[16/9]"
               sizes="(min-width: 1024px) 70vw, 100vw"
               parallax
