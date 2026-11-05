@@ -78,6 +78,8 @@ export function Footer() {
             Política de Privacidade
           </TransitionLink>
         </div>
+
+        <p className="type-small mt-10 border-t border-ink-soft pt-6">Feito por Eduardo Sousa</p>
       </div>
     </footer>
   );

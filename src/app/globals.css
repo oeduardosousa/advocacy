@@ -186,6 +186,11 @@
   max-width: calc(var(--container-max) + 2 * var(--gutter));
   margin-inline: auto;
   padding-inline: var(--gutter);
+  /* On screens wider than the container, lean left: take only a share of the slack as left margin
+     so the page does not sit pushed toward the right edge. */
+  @media (min-width: 1280px) {
+    margin-inline: max(0px, calc((100% - var(--container-max) - 2 * var(--gutter)) * 0.2)) auto;
+  }
 }
 @utility section-major {
   padding-block: var(--section-major);

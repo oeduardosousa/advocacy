@@ -51,7 +51,7 @@ export function ClosingCta() {
             </p>
           </div>
 
-          <div className="col-span-4 flex sm:col-span-2 lg:col-span-2 lg:col-start-11 lg:items-end lg:justify-end">
+          <div className="col-span-4 flex sm:col-span-2 lg:col-span-2 lg:col-start-11 lg:items-end lg:justify-end lg:pb-1.5">
             <Seal onInk />
           </div>
         </div>
