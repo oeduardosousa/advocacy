@@ -418,7 +418,8 @@
 }
 /* The cover hides the photograph until the Develop beat. Visible by default so the
    image never flashes; a failsafe removes it if scripts never run. */
-.hero-cover {
+.hero-cover,
+.img-cover {
   transform-origin: top;
   animation: cover-failsafe 0s linear 4s forwards;
 }
@@ -428,12 +429,14 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-cover {
+  .hero-cover,
+  .img-cover {
     display: none;
   }
 }
 @media (scripting: none) {
-  .hero-cover {
+  .hero-cover,
+  .img-cover {
     display: none;
   }
 }
@@ -604,5 +607,26 @@ html[data-veil-go] .veil {
   html[data-veil-go] .veil {
     animation-delay: 0s;
     animation-duration: 400ms;
+  }
+}
+
+/* ---- Secondary button on the Ink band (Paper outline, Paper fill sweeps in) ---- */
+.btn-secondary-ink {
+  border-color: var(--color-paper);
+  color: var(--color-paper);
+}
+.btn-secondary-ink::before {
+  background: var(--color-paper);
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn-secondary-ink:hover {
+    color: var(--color-ink);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  @media (hover: hover) and (pointer: fine) {
+    .btn-secondary-ink:hover {
+      background: var(--color-paper);
+    }
   }
 }

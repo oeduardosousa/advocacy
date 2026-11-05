@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 
 import { Veil } from "@/components/layout/Veil";
+import { Footer } from "@/components/layout/Footer";
 import { SiteNav } from "@/components/layout/SiteNav";
 import { WhatsAppBar } from "@/components/layout/WhatsAppBar";
 import { MotionProvider } from "@/components/providers/MotionProvider";
@@ -42,6 +43,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <main id="conteudo" tabIndex={-1}>
               {children}
             </main>
+            <Footer />
           </PageTransitionShell>
         </MotionProvider>
       </body>

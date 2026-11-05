@@ -173,12 +173,9 @@ export function Hero() {
             <p data-hero-marginal className="type-label absolute right-6 top-2 text-ink-mute">
               01
             </p>
-            <p data-hero-marginal className="type-label absolute bottom-0 right-6 text-right text-ink-mute">
-              02
-            </p>
             <p
               data-hero-marginal
-              className="type-small absolute bottom-10 right-6 max-w-[16ch] text-right text-ink-mute"
+              className="type-small absolute bottom-0 right-6 max-w-[16ch] text-right text-ink-mute"
             >
               Conteúdo de demonstração. Escritório fictício.
             </p>

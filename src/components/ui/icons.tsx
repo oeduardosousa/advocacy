@@ -48,3 +48,20 @@ export function WhatsAppGlyph(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function Plus(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base(props)}>
+      <path d="M12 5v14" />
+      <path d="M5 12h14" />
+    </svg>
+  );
+}
+
+export function Minus(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base(props)}>
+      <path d="M5 12h14" />
+    </svg>
+  );
+}
