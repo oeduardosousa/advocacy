@@ -265,3 +265,293 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* =====================================================================
+   Components (Phase 4)
+   ===================================================================== */
+
+/* ---- Buttons: 52px, label type, square. Hover = a transform-only fill layer. ---- */
+.btn {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 52px;
+  padding: 0 32px;
+  overflow: hidden;
+  border: 1px solid transparent;
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: var(--text-label--letter-spacing);
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  touch-action: manipulation;
+  transition:
+    color var(--dur-base) var(--ease-out),
+    transform 120ms var(--ease-out);
+}
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: translateY(101%);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.btn:active {
+  transform: scale(var(--press-scale));
+}
+.btn-primary {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+.btn-primary::before {
+  background: var(--color-oxblood);
+}
+.btn-whatsapp {
+  background: var(--color-oxblood);
+  color: var(--color-paper);
+}
+.btn-whatsapp::before {
+  background: var(--color-ink);
+}
+.btn-secondary {
+  border-color: var(--color-ink);
+  color: var(--color-ink);
+}
+.btn-secondary::before {
+  background: var(--color-ink);
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover::before {
+    transform: translateY(0);
+  }
+  .btn-secondary:hover {
+    color: var(--color-paper);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* Transform-based hover removed; colour change only (160ms). */
+  .btn::before {
+    display: none;
+  }
+  .btn:active {
+    transform: none;
+  }
+  .btn {
+    transition:
+      color var(--dur-fast) linear,
+      background-color var(--dur-fast) linear;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover {
+      background: var(--color-oxblood);
+    }
+    .btn-whatsapp:hover,
+    .btn-secondary:hover {
+      background: var(--color-ink);
+    }
+  }
+}
+
+/* ---- Quiet link: hairline underline draws left to right ---- */
+.link-quiet {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding-block: 12px;
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: var(--text-label--letter-spacing);
+  text-transform: uppercase;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 calc(100% - 8px);
+  background-size: 0% 1px;
+  transition: background-size var(--dur-base) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .link-quiet:hover {
+    background-size: 100% 1px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .link-quiet {
+    transition: none;
+  }
+}
+
+/* ---- Settle (beat 0): nav and CTA fade in. CSS only, opacity. ---- */
+@keyframes settle {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.settle {
+  animation: settle 400ms var(--ease-out) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .settle {
+    animation: none;
+  }
+}
+
+/* ---- Text line masks (SplitText). Display lh is < 1, so pad the mask to keep
+        ascenders and descenders (ç, é, p) unclipped. ---- */
+.line-mask {
+  padding-block: 0.12em;
+  margin-block: -0.12em;
+}
+
+/* ---- Hero ---- */
+.hero.is-stacked {
+  position: sticky;
+  top: var(--hero-top, 0px);
+}
+/* The cover hides the photograph until the Develop beat. Visible by default so the
+   image never flashes; a failsafe removes it if scripts never run. */
+.hero-cover {
+  transform-origin: top;
+  animation: cover-failsafe 0s linear 4s forwards;
+}
+@keyframes cover-failsafe {
+  to {
+    visibility: hidden;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-cover {
+    display: none;
+  }
+}
+@media (scripting: none) {
+  .hero-cover {
+    display: none;
+  }
+}
+
+/* ---- Sheets: the next sheet slides over the previous one. The only shadow in the
+        system, applied only while the sheet is lifted (DESIGN.md Sheet lift, mirrored
+        upward because the sheet's top edge is what shows). ---- */
+.sheet {
+  position: relative;
+  z-index: 10;
+  background: var(--color-paper-light);
+  border-top: 1px solid var(--color-rule);
+}
+.sheet[data-lifted] {
+  box-shadow:
+    0 -1px 0 rgb(20 17 15 / 0.06),
+    0 -24px 48px -24px rgb(20 17 15 / 0.28);
+}
+
+/* ---- Site navigation ---- */
+.site-nav {
+  transition:
+    transform var(--dur-base) var(--ease-drawer),
+    background-color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out);
+  border-bottom: 1px solid transparent;
+}
+.site-nav[data-scrolled="true"] {
+  background: var(--color-paper);
+  border-bottom-color: var(--color-rule);
+}
+.site-nav[data-hidden="true"] {
+  transform: translateY(-100%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-nav {
+    transition: background-color var(--dur-base) linear;
+  }
+  .site-nav[data-hidden="true"] {
+    transform: none;
+  }
+}
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--color-ink);
+}
+.nav-link[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6px;
+  height: 2px;
+  background: var(--color-oxblood);
+}
+@media (hover: hover) and (pointer: fine) {
+  .nav-link:not([aria-current="page"]):hover {
+    color: var(--color-oxblood);
+  }
+}
+.nav-link {
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+/* Mobile menu: a Paper sheet from the top. In 320ms drawer, out 220ms. */
+.menu-sheet {
+  transform: translateY(-100%);
+  visibility: hidden;
+  transition:
+    transform 220ms var(--ease-inout),
+    visibility 0s linear 220ms;
+}
+.menu-sheet[data-open="true"] {
+  transform: translateY(0);
+  visibility: visible;
+  transition:
+    transform 320ms var(--ease-drawer),
+    visibility 0s;
+}
+.menu-item {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 160ms var(--ease-out),
+    transform 160ms var(--ease-out);
+}
+.menu-sheet[data-open="true"] .menu-item {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 400ms var(--ease-out) calc(120ms + var(--i) * var(--stagger-items)),
+    transform 400ms var(--ease-out) calc(120ms + var(--i) * var(--stagger-items));
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu-sheet,
+  .menu-sheet[data-open="true"] {
+    transform: none;
+    opacity: 0;
+    transition:
+      opacity 150ms linear,
+      visibility 0s linear 150ms;
+  }
+  .menu-sheet[data-open="true"] {
+    opacity: 1;
+    transition: opacity 150ms linear;
+  }
+  .menu-item,
+  .menu-sheet[data-open="true"] .menu-item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---- Mobile WhatsApp bar ---- */
+.wa-bar {
+  padding-bottom: env(safe-area-inset-bottom);
+}

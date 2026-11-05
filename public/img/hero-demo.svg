@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1000" width="1500" height="1000" role="img" aria-label="Ilustração de demonstração: luz de janela sobre uma mesa com folhas de papel">
+  <rect width="1500" height="1000" fill="#2A231D"/>
+  <!-- window light falling across the desk -->
+  <polygon points="760,0 1130,0 1500,1000 930,1000" fill="#4B3F33"/>
+  <polygon points="860,0 1010,0 1260,1000 1010,1000" fill="#6A5B49"/>
+  <!-- desk edge -->
+  <rect y="720" width="1500" height="280" fill="#1B1713"/>
+  <rect y="716" width="1500" height="4" fill="#3A3027"/>
+  <!-- stack of paper -->
+  <g>
+    <rect x="300" y="560" width="520" height="170" fill="#C9BDA8"/>
+    <rect x="296" y="540" width="520" height="170" fill="#D8CDB9"/>
+    <rect x="292" y="520" width="520" height="170" fill="#E6DCC8"/>
+    <rect x="288" y="500" width="520" height="170" fill="#F0E8D8"/>
+    <rect x="288" y="498" width="520" height="2" fill="#B8AFA1"/>
+    <rect x="340" y="540" width="260" height="3" fill="#B8AFA1"/>
+    <rect x="340" y="566" width="340" height="3" fill="#B8AFA1"/>
+    <rect x="340" y="592" width="300" height="3" fill="#B8AFA1"/>
+  </g>
+  <!-- fountain pen -->
+  <g transform="rotate(-14 1000 640)">
+    <rect x="780" y="628" width="420" height="22" fill="#0F0D0B"/>
+    <rect x="1190" y="632" width="60" height="14" fill="#3A342D"/>
+    <polygon points="780,628 700,639 780,650" fill="#6B6155"/>
+  </g>
+</svg>
