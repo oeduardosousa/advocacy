@@ -43,7 +43,8 @@ export function Areas({ areas }: { areas: Area[] }) {
       start: "top top",
       end: () => `+=${Math.round(window.innerHeight * PIN_VIEWPORTS)}`,
       pin: true,
-      anticipatePin: 1,
+      // Measure first, so every trigger below the pin is computed with its spacing.
+      refreshPriority: 1,
       invalidateOnRefresh: true,
       onRefresh: () =>
         // Hysteresis: hiding summaries frees ~120px, so do not flip back until they would fit.
