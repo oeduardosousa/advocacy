@@ -256,6 +256,9 @@
     accent-color: var(--color-oxblood);
     caret-color: var(--color-oxblood);
     -webkit-tap-highlight-color: rgb(122 31 43 / 0.12);
+    /* Fixed nav (top) and WhatsApp bar (bottom, mobile) must never cover a focused or anchored element. */
+    scroll-padding-top: 6rem;
+    scroll-padding-bottom: 5rem;
   }
 
   /* Tailwind v4 resets buttons to the default arrow; pressable things get the hand. */

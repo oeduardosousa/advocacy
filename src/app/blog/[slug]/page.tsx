@@ -112,7 +112,7 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
               <div>
                 <dt className="type-label text-ink-mute">Autoria</dt>
                 <dd className="mt-2">
-                  <TransitionLink href={ROUTES.member(author.slug)} className="type-title link-underline">
+                  <TransitionLink href={ROUTES.member(author.slug)} className="type-title link-underline inline-flex min-h-11 items-center">
                     {author.name}
                   </TransitionLink>
                   <span className="type-small mt-1 block text-ink-mute">Perfil fictício</span>
@@ -123,7 +123,7 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
               <div>
                 <dt className="type-label text-ink-mute">Área</dt>
                 <dd className="mt-2">
-                  <TransitionLink href={ROUTES.area(area.slug)} className="type-body link-underline">
+                  <TransitionLink href={ROUTES.area(area.slug)} className="type-body link-underline inline-flex min-h-11 items-center">
                     {area.name}
                   </TransitionLink>
                 </dd>

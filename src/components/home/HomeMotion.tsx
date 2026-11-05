@@ -36,10 +36,10 @@ export function HomeMotion() {
       const startAt = Math.floor(Math.random() * TITLE_VARIANTS.length);
       // SplitText (lines + chars) forces layout and creates hundreds of spans, so it runs
       // lazily when each headline is about to enter, never for all of them at startup.
-      // Until then the headline is hidden with a cheap opacity set (no layout read).
+      // Until then it is only transparent (never visibility:hidden, so it stays in the accessibility tree).
       all<HTMLElement>('[data-reveal="lines"]').forEach((el, index) => {
         const variant: TitleVariant = lite ? "cascade" : TITLE_VARIANTS[(startAt + index) % TITLE_VARIANTS.length];
-        gsap.set(el, { autoAlpha: 0 });
+        gsap.set(el, { opacity: 0 });
         ScrollTrigger.create({
           trigger: el,
           start: "top 85%",
@@ -50,7 +50,7 @@ export function HomeMotion() {
               linesClass: "rv-line",
             });
             const { targets, vars } = titleTween(variant, split, k);
-            gsap.set(el, { autoAlpha: 1 });
+            gsap.set(el, { opacity: 1 });
             gsap.from(targets, {
               ...vars,
               ease: ease.out,

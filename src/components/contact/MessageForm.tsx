@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 
 import { WhatsAppGlyph } from "@/components/ui/icons";
 import { whatsappLink } from "@/lib/site";
 
 const fieldClass =
-  "mt-2 block w-full border border-rule bg-paper-light px-4 py-3 text-ink placeholder:text-ink-mute focus:border-ink focus:outline-none";
+  "mt-2 block w-full border border-ink-mute bg-paper-light px-4 py-3 text-ink placeholder:text-ink-mute focus:border-ink";
 
 /**
  * Message composer: the visitor writes here, and on send the WhatsApp chat opens in a new
@@ -17,13 +17,17 @@ export function MessageForm() {
   const [message, setMessage] = useState("");
   const [touched, setTouched] = useState(false);
   const [sent, setSent] = useState(false);
+  const messageRef = useRef<HTMLTextAreaElement>(null);
 
   const invalid = message.trim().length === 0;
 
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setTouched(true);
-    if (invalid) return;
+    if (invalid) {
+      messageRef.current?.focus(); // first error gets focus
+      return;
+    }
     const intro = name.trim() ? `Olá, meu nome é ${name.trim()}.` : "Olá.";
     window.open(whatsappLink(`${intro}\n\n${message.trim()}`), "_blank", "noopener,noreferrer");
     setSent(true);
@@ -51,6 +55,7 @@ export function MessageForm() {
           Sua mensagem
         </label>
         <textarea
+          ref={messageRef}
           id="mf-message"
           name="message"
           rows={7}

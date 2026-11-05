@@ -105,7 +105,7 @@ export function SiteNav() {
         <div className="container-page flex h-16 items-center justify-between lg:h-20">
           <TransitionLink
             href={ROUTES.home}
-            className="settle font-serif text-[1.375rem] leading-none tracking-[-0.01em] text-ink"
+            className="settle inline-flex min-h-11 items-center font-serif text-[1.375rem] leading-none tracking-[-0.01em] text-ink"
             aria-label={`${SITE.name}, página inicial`}
           >
             {SITE.name}
