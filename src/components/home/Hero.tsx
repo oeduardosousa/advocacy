@@ -63,8 +63,8 @@ export function Hero() {
       // 3. Develop
       if (image) {
         if (lite) {
+          // Visible from first paint (mobile LCP): no cover, no entrance animation.
           if (cover) gsap.set(cover, { display: "none" });
-          tl.from(image, { opacity: 0, y: shift.fade, duration: 0.6 }, 0.4);
         } else {
           if (cover) tl.fromTo(cover, { scaleY: 1 }, { scaleY: 0, duration: dur.scene, ease: ease.drawer }, 0.8);
           tl.fromTo(image, { scale: scale.develop }, { scale: 1, duration: dur.scene, ease: ease.drawer }, 0.8);

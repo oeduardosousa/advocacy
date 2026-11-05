@@ -630,3 +630,11 @@ html[data-veil-go] .veil {
     }
   }
 }
+
+/* Lite tier: the photograph is visible from first paint (it is the mobile LCP element);
+   no cover, no entrance animation on it. */
+@media (max-width: 1023px), (pointer: coarse) {
+  .hero-cover {
+    display: none;
+  }
+}
