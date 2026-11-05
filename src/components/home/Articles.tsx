@@ -13,7 +13,7 @@ function PostCard({ post, index, large }: { post: Post; index: number; large?: b
         sizes={large ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 33vw, 100vw"}
         hoverZoom
       />
-      <p className="type-label mt-5 text-ink-mute">{post.tags[0] ?? "Artigo"}</p>
+      <p className="type-label mt-5 text-ink-mute">{post.tags.find((t) => t !== "Demonstração") ?? "Demonstração"}</p>
       <h3 className={`mt-2 ${large ? "type-headline max-w-[18ch] !text-[clamp(1.75rem,1.2rem+2vw,3rem)]" : "type-title"}`}>
         <TransitionLink href={ROUTES.post(post.slug)}>{post.title}</TransitionLink>
       </h3>
