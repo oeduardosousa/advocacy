@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "src/components/home/Areas.tsx"
+        ],
+        "createdAt": "2026-11-05T15:07:54.482Z",
+        "reason": "assistant: <Img name=...> is a wrapper that renders <picture><img src> at runtime; all six area images loaded (naturalWidth 858) in the browser, so the static scan is a false positive"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "src/components/home/Hero.tsx"
+        ],
+        "createdAt": "2026-11-05T15:07:54.705Z",
+        "reason": "assistant: <Img name=...> is a wrapper that renders <picture><img src> at runtime; all six area images loaded (naturalWidth 858) in the browser, so the static scan is a false positive"
+      }
+    ]
+  }
+}
